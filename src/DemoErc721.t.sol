@@ -3,16 +3,16 @@ pragma solidity ^0.8.6;
 
 import "ds-test/test.sol";
 
-import "./DemoErc721a.sol";
+import "./DemoErc721.sol";
 
-contract DemoErc721aTest is DSTest {
+contract DemoErc721Test is DSTest {
 
-    DemoErc721a a;
+    DemoErc721 a;
     address testWallet = address(0x7E67aF7FF72cb87b7B0100cA8128F4673D185234);
     address testWallet2 = address(0x7E67af7FF72Cb87B7b0100ca8128f4673D185235);
 
     function setUp() public {
-        a = new DemoErc721a();
+        a = new DemoErc721();
     }
 
     function mintMultiple(uint256 numToMint) public {
