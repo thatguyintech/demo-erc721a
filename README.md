@@ -22,6 +22,34 @@ And then deploying a sample ERC721A contract using [Alchemy](https://www.alchemy
     - mint 1 piece up to 5 pieces (batch)
     - compare gas costs
 
+```
+thatguyintech@albert demo-erc721a % npx hardhat test
+
+
+  OpenZeppelin ERC721 Enumerable
+    gas to mint 1 142006
+    gas to mint 2 257688
+    gas to mint 3 373370
+    gas to mint 4 489052
+    gas to mint 5 604734
+    ✓ cost to mint  (736ms)
+
+  Azuki ERC721A
+    gas to mint 1 93704
+    gas to mint 2 96212
+    gas to mint 3 98720
+    gas to mint 4 101228
+    gas to mint 5 103736
+    ✓ cost to mint  (165ms)
+```
+
+You can see from the above results that the findings in the original 
+Azuki ERC721A blog post are true. Batch-minting 5 pieces using the ERC721A
+implementation costs around the same (or less!) compared to batch minting
+only 1 piece using the ERC721Enumerable implementation.
+
+Pretty cool stuff.
+
 - [ ] Check how much other functions cost
     - `transferFrom`
     - `setApprovalForAll`
