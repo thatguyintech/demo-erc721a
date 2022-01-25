@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/thatguyintech/demo-erc721a/issues"
   },
-  "homepage": "https://github.com/thatguyintech/demo-erc721a#readme"
+  "homepage": "https://github.com/thatguyintech/demo-erc721a#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.4",
+    "ethers": "^5.5.3",
+    "hardhat": "^2.8.3"
+  }
 }
