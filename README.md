@@ -1,36 +1,30 @@
-Using [dapptools](https://github.com/dapphub/dapptools) to measure relative gas costs for
+# Welcome
+
+In this repo, we are going to be using [Hardhat](https://hardhat.org/) to measure
+relative gas costs for:
 
 * OpenZeppelin ERC721Enumerable, vs.
 * Azuki ERC721A
 
-## _safeMint()
+And then deploying a sample ERC721A contract using [Alchemy](https://www.alchemy.com/)
 
-```
-Running 5 tests for src/DemoErc721.t.sol:DemoErc721Test
-[PASS] testMint_1() (gas: 126296)
-[PASS] testMint_2() (gas: 242011)
-[PASS] testMint_3() (gas: 357769)
-[PASS] testMint_4() (gas: 473482)
-[PASS] testMint_5() (gas: 589175)
-```
+---
 
-```
-Running 5 tests for src/DemoErc721a.t.sol:DemoErc721aTest
-[PASS] testMint_1() (gas: 75981)
-[PASS] testMint_2() (gas: 78483)
-[PASS] testMint_3() (gas: 81028)
-[PASS] testMint_4() (gas: 83528)
-[PASS] testMint_5() (gas: 86008)
-```
+First:
 
-These results line up very closely with the blog post: https://www.azuki.com/erc721a
+1. Validate the [blog post](https://www.azuki.com/erc721a)
+- mint 1 piece, 2 pieces, 3 pieces, 4 pieces, and 5 pieces
+- compare gas costs
 
-## transferFrom()
+2. Check how much other functions cost
+- `transferFrom`
+- `setApprovalForAll`
 
-tbd
+3. Take a break and reflect on life
 
-... if anyone knows the answer to this question:
+Then:
 
-https://ethereum.stackexchange.com/questions/118808/while-writing-a-test-using-dapptools-how-do-i-send-a-transaction-as-a-specific
+4. Create a new contract that inherits from the ERC721A contract
+- Deploy to Rinkeby!
 
-it would help a lot 🙏
+5. Build a frontend site that displays the gas costs when a user mints
