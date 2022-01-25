@@ -8,8 +8,6 @@ relative gas costs for:
 
 And then deploying a sample ERC721A contract using [Alchemy](https://www.alchemy.com/)
 
----
-
 ## If you want to run this code yourself:
 
 1. `git clone git@github.com:thatguyintech/demo-erc721a.git`
