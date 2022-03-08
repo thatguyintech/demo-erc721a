@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("OpenZeppelin ERC721 Enumerable", function () {
+describe("OpenZeppelin ERC721Enumerable", function () {
     it(`cost to mint `, async function () {
         for (var i = 1; i < 6; i++) {
             const ERC721 = await ethers.getContractFactory("DemoErc721");
