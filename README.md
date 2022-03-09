@@ -46,10 +46,11 @@ only 1 piece using the ERC721Enumerable implementation.
 
 Pretty cool stuff.
 
-However, I also wanted to know if there are any tradeoffs of using ERC721A,
+However, I also wanted to know if there are any downsides to using ERC721A,
 and indeed there are some negative tradeoffs:
 
-https://twitter.com/fulldecent/status/1491506122565595141?s=20&t=rystKohzG5MkxONXxxvFxA
+After a user batch mints some NFTs, depending on which tokenId they subsequently
+transfer, the gas costs may increase linearly.
 
 ```
 thatguyintech@albert demo-erc721a % npx hardhat test
@@ -92,6 +93,8 @@ Azuki ERC721A
 
 translated to an table for legibility:
 
+(read x-axis then y-axis, for example: `"Mint 1 then transfer tokenId 0"` or `"Mint 4 then transfer tokenId 3"`)
+
 OpenZeppelin ERC721Enumerable:
 |       | Mint 1 | Mint 2 | Mint 3 | Mint 4 | Mint 5 |
 | ----- | ------ | ------ | ------ | ------ | ------ |
@@ -109,6 +112,27 @@ Azuki ERC721A:
 | t2    |        |        |93927   |114615  |114615  |
 | t3    |        |        |        |96657   |111885  |
 | t4    |        |        |        |        |99387   |
+
+We can see that the cost to mint higher-numbered tokenIDs 
+increases when the original batch mint size increases.
+
+Although it sucks to see this linear cost increase for transfers
+solely based on which tokenID you want to transfer, there is 
+a workaround:
+
+https://twitter.com/fulldecent/status/1491506122565595141?s=20&t=rystKohzG5MkxONXxxvFxA
+
+> 1. Always mint the maximum allowed
+> 2. Transfer out your ODD numbered tokens first in ascending order
+> 3. Then transfer out your EVEN numbered tokens
+
+Also, for most people, the impact of ERC721A on transfer might not matter too much.
+The mint function is much more important because it is the first impression that
+people have of the project.
+
+If the fees are high, they will be sad. If the fees are low, they will be happy.
+
+Transfers are rare and only happen every once in a while.
 
 ## TODO..
 
