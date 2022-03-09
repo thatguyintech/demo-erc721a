@@ -1,4 +1,4 @@
-# ERC721Enumerable vs ERC721A 
+# OpenZeppelin ERC721Enumerable vs Azuki ERC721A 
 
 In this repo, we are going to be using [Hardhat](https://hardhat.org/) to measure
 relative gas costs for:
