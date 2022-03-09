@@ -107,7 +107,7 @@ const initializeContract = async (contract, maxBatchSize) => {
 const mintAndLogGas = async (contract, account, quantity) => {
     const mint = await contract.connect(account).mint(account.address, quantity);
     const mintTxnResponse = await mint.wait();
-    console.log(`\tgas to mint ${quantity}`, mintTxnResponse.gasUsed.toString());
+    console.log(`\tgas to mint ${quantity}:`, mintTxnResponse.gasUsed.toString());
 }
 
 const mintAndTransfer = async (contract, account, quantity, tokenId) => {
