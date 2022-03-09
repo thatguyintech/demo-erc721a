@@ -16,7 +16,7 @@ contract DemoErc721 is ERC721Enumerable {
     function mint(address to, uint256 quantity) public {
         require(quantity <= maxBatchSize, "cannot mint more than maxBatchSize");
         for (uint256 i = 0; i < quantity; i++) {
-            _safeMint(to, totalSupply()+1);
+            _safeMint(to, totalSupply());
         }
     }
 }

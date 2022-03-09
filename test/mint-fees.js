@@ -32,6 +32,21 @@ describe("OpenZeppelin ERC721Enumerable", function () {
             expect(assertionError).to.be.true;
         }
     })
+
+    it(`can transfer nth token after minting a batch of i`, async function() {
+        for (var i = 1; i < 6; i++) {
+            for (var n = i-1; n > -1; n--)  {
+                // Initialize the OpenZeppelin Contract with maxBatchSize of i.
+                const erc721 = await initializeContract("DemoErc721", i);
+
+                // Simulate a user wallet.
+                const [_, addr1] = await ethers.getSigners();
+
+                // Batch mint i then transfer the nth token.
+                await mintAndTransfer(erc721, addr1, i, n);
+            }
+        }
+    })
 });
 
 describe("Azuki ERC721A", async function () {
@@ -65,6 +80,21 @@ describe("Azuki ERC721A", async function () {
             expect(assertionError).to.be.true;
         }
     })
+
+    it(`can transfer nth token after minting a batch of i`, async function() {
+        for (var i = 1; i < 6; i++) {
+            for (var n = i-1; n > -1; n--)  {
+                // Initialize the OpenZeppelin Contract with maxBatchSize of i.
+                const erc721a = await initializeContract("DemoErc721a", 5);
+
+                // Simulate a user wallet.
+                const [_, addr1] = await ethers.getSigners();
+
+                // Batch mint i then transfer the nth token.
+                await mintAndTransfer(erc721a, addr1, i, n);
+            }
+        }
+    })
 });
 
 const initializeContract = async (contract, maxBatchSize) => {
@@ -78,4 +108,13 @@ const mintAndLogGas = async (contract, account, quantity) => {
     const mint = await contract.connect(account).mint(account.address, quantity);
     const mintTxnResponse = await mint.wait();
     console.log(`\tgas to mint ${quantity}`, mintTxnResponse.gasUsed.toString());
+}
+
+const mintAndTransfer = async (contract, account, quantity, tokenId) => {
+    const mintTx = await contract.connect(account).mint(account.address, quantity);
+    await mintTx.wait();
+
+    const transferTx = await contract.connect(account)["safeTransferFrom(address,address,uint256)"](account.address, "0x000000000000000000000000000000000000dEaD", tokenId);
+    const transferReceipt = await transferTx.wait();
+    console.log(`\tminted ${quantity}, transfered id: ${tokenId}, cost: ${transferReceipt.gasUsed.toString()}`);
 }
